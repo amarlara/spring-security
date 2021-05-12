@@ -21,7 +21,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @EnableWebMvc
 @ComponentScan(basePackages = "com.lithi.springsecurity.demo")
 @PropertySource("classpath:persistence-mysql.properties")
-public class DemoAppConfig {
+public class AppConfig {
 
 	@Autowired
 	private Environment env;

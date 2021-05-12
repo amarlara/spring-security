@@ -11,24 +11,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 @EnableWebSecurity
-public class DemoSecutiryConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private DataSource secutiryDataSource;
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-		/*
-		 * UserBuilder users = User.withDefaultPasswordEncoder();
-		 * 
-		 * auth.inMemoryAuthentication().withUser(users.username("lithi").password(
-		 * "lithi123").roles("EMPLOYEE"))
-		 * .withUser(users.username("Mouni").password("lithi123").roles("EMPLOYEE",
-		 * "MANAGER"))
-		 * .withUser(users.username("Ranjith").password("lithi123").roles("EMPLOYEE",
-		 * "ADMIN"));
-		 */
 		auth.jdbcAuthentication().dataSource(secutiryDataSource);
 	}
 
@@ -38,9 +27,6 @@ public class DemoSecutiryConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/systems/**").hasRole("ADMIN").anyRequest().authenticated().and().formLogin()
 				.loginPage("/loginPage").loginProcessingUrl("/authenticateTheUser").permitAll().and().logout()
 				.permitAll().and().exceptionHandling().accessDeniedPage("/access-denied");
-		// http.authorizeRequests().antMatchers("/").anyRequest().authenticated().and().formLogin()
-		// .loginPage("/loginPage").loginProcessingUrl("/authenticateTheUser").permitAll().and().logout()
-		// .permitAll();
 	}
 
 }
